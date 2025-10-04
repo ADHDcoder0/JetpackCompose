@@ -28,6 +28,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
@@ -44,56 +45,52 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val painter = painterResource(id = R.drawable.mig2000)
-            val description = "Modi ki jai kya chij banayi"
-            val title = ""
-            ImageCard(painter=painter , ImageDiscription = description ,title=title, modifier = Modifier.padding(horizontal = 0.dp, vertical = 25.dp))
-//            Row(
-//                modifier = Modifier
-//                    .fillMaxSize(0.99f)
-//              .width(1920.dp)
-//                .height(3600.dp)
-//                .fillMaxHeight(0.7f)
-//                .fillMaxWidth(0.6f)
-//                    .background(Color.Red)
-//                    .requiredWidth(300.dp)
-//                    .padding(21.dp),
-//                verticalAlignment = Alignment.CenterVertically,
-//                horizontalArrangement = Arrangement.SpaceAround
-//            ) {
-//                Text("Hello", modifier = Modifier.offset(50.dp, 20.dp)
-//                    .background(Color.Blue))
-//                Text("world")
-//                Text("Why")
-//            }
-//            Column(
-//                modifier= Modifier
-//                    .fillMaxSize()
-//                    .background(Color.Blue)
-//                    .padding(20.dp)
-//                    .border(10.dp,Color.Yellow),
-//
-//                    verticalArrangement = Arrangement.SpaceEvenly ,
-//            ){
-//                Text(Name())
-//            }
-      }
-    }}
+            val description = "MIG 2000-The Ramjet King"
+            val title = "MIG 2000- The Ramjet King"
 
-fun Name ( ):String{
-    return "My name is Kushagra"
+            Box(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 25.dp)
+                    .fillMaxWidth(.5f)
+            )
+            {
+                ImageCard(
+                    painter = painter,
+                    ImageDiscription = description,
+                    title = title,
+                    modifier = Modifier
+                )
+            }
+        }
+    }
 }
+
 
 @Composable
 
 fun ImageCard(painter: Painter,ImageDiscription :String,title:String,modifier:Modifier=Modifier){
-    Card(modifier = modifier.fillMaxWidth(.5f).background(color = Color.Red),
+    Card(modifier = modifier.fillMaxWidth().background(color = Color.Red),
         shape = RoundedCornerShape(15.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
 
     ) {
         Box(modifier = Modifier.height(200.dp)){
             Image(painter = painter, contentDescription = ImageDiscription, contentScale = ContentScale.Crop)
-            Box(modifier= Modifier.fillMaxSize().padding(15.dp),
+            Box(modifier=Modifier
+                .fillMaxSize()
+                .background(
+                    Brush.verticalGradient(
+                       colors =  listOf<Color>(
+                           Color.Transparent,
+                           Color.Black
+
+                       ),
+                        startY=300f
+                    )
+                )
+            )
+            Box(modifier= Modifier
+                .fillMaxSize()
+                .padding(15.dp),
                 contentAlignment=Alignment.BottomStart){
                 Text(title, style = TextStyle(color=Color.White,fontSize=16.sp))
             }
